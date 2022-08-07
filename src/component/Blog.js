@@ -1,95 +1,54 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Tr from "./Blog_Tr";
+// 게시글 원본 데이터
+import data from "./blog_data/data.json";
 
+import ListTable from "./Table/ListTable";
+import SortSelecter from "./Filter/Sort";
+import CategorySelecter from "./Filter/Category";
+import Search from "./Search/Search";
+import Pagenation from "./Pagenation/Pagenation";
+
+// 테이블 헤더
+const tableHeader = ["#", "Title", "Category", "Date"];
 function Blog() {
-    const date = new Date();
-    const nowDate = date.toLocaleDateString("ko-kr");
+    const navigate = useNavigate();
+    // Search가 수정
+    const [postData, setPostData] = useState(data); // 게시글 데이터
+    // Sort와 Category가 수정
+    const [sortedData, setSortedData] = useState(data); // 정렬/필터링 된 게시글 데이터
+    // Pagenation이 수정
+    const [tablePostData, setTablePostData] = useState([]); // 리스트테이블에 표시될 현재 페이지의 게시글 데이터
 
-    const [postData, setPostData] = useState([
-        {
-            num: 1,
-            title: "a",
-            category: "Javascript",
-            date: nowDate,
-        },
-        {
-            num: 2,
-            title: "f",
-            category: "HTML",
-            date: "2022. 6. 3.",
-        },
-        {
-            num: 3,
-            title: "e",
-            category: "HTML",
-            date: nowDate,
-        },
-        {
-            num: 4,
-            title: "c",
-            category: "CSS",
-            date: nowDate,
-        },
-        {
-            num: 5,
-            title: "d",
-            category: "Javascript",
-            date: nowDate,
-        },
-        {
-            num: 6,
-            title: "b",
-            category: "Javascript",
-            date: nowDate,
-        },
-    ]);
-    const [sortState, setSortState] = useState(1);
-
-    const handleSortSelect = (event) => {
-        switch (event.target.value) {
-            case "1":
-                setSortState(1);
-                break;
-            case "2":
-                setSortState(2);
-                break;
-            case "3":
-                setSortState(3);
-                break;
-            default:
-                setSortState(1);
-                break;
-        }
+    const handleWriteBtn = (event) => {
+        navigate(`/blog/post/${data.length + 1}`, {
+            state: {
+                index: data.length + 1,
+                currentData: data[data.length + 1],
+            },
+        });
     };
 
     return (
         <div className="container">
             <div className="row">
-                <div className="col-2">
-                    <label className="form-label float-start" htmlFor="inputGroupSelect01">
-                        정렬
-                    </label>
-                    <div className="input-group">
-                        <select onChange={(e) => handleSortSelect(e)} className="form-select text-center" id="inputGroupSelect01">
-                            <option value="1">기본</option>
-                            <option value="2">제목 순</option>
-                            <option value="3">오래된 순</option>
-                        </select>
-                    </div>
+                <SortSelecter postData={postData} setSortedData={setSortedData} />
+                <CategorySelecter postData={postData} setSortedData={setSortedData} />
+                <Search data={data} setPostData={setPostData} />
+            </div>
+
+            <ListTable header={tableHeader} tablePostData={tablePostData} />
+
+            <div className="row">
+                <Pagenation sortedData={sortedData} setTablePostData={setTablePostData} />
+                <div className="col">
+                    <button onClick={(e) => handleWriteBtn(e)} type="button" className="btn btn-outline-secondary">
+                        Write
+                    </button>
                 </div>
             </div>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Date</th>
-                    </tr>
-                </thead>
-                <Tr postData={postData} sortState={sortState} />
-            </table>
+            <br></br>
         </div>
     );
 }

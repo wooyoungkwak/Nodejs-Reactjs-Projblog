@@ -16,7 +16,7 @@ function Nav() {
                             </li>
                             <li className="nav-item"><a className="nav-link over" id="about" href="/about">About</a></li>
                             <li className="nav-item"><a className="nav-link over" id="contact" href="/contact">Contact</a></li>
-                            <li className="nav-item"><a className="nav-link over" aria-current="page" id="blog" href="/blog">Blog</a></li>
+                            <li className="nav-item"><a className="nav-link over" aria-current="page" id="blog" href="/blog?sort=1&order=1&category=1&target=1&keyword=&num=10&page=1">Blog</a></li>
                         </ul>
                     </div>
                 </div>

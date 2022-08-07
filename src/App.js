@@ -8,6 +8,8 @@ import Home from './component/Home';
 import About from './component/About';
 import Contact from './component/Contact';
 import Blog from './component/Blog';
+import PostPage from './component/Postpage';
+
 import AddScript from './component/AddScript';
 
 import "./css/prog-blog-styles.css";
@@ -28,6 +30,7 @@ function App() {
           <Route exact path='/about' element={<About />} />
           <Route exact path='/contact' element={<Contact />} />
           <Route exact path='/blog'  element={<Blog />} />
+          <Route exact path='/blog/post/:index'  element={<PostPage />} />
         </Routes>
         <Footer />
         <AddScript />
