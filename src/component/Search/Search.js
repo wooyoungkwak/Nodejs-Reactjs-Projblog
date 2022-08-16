@@ -36,9 +36,6 @@ function Search({ data, setPostData }) {
     }, []);
 
     useEffect(() => {
-        console.log('target : ', target);
-        console.log("keyword", keyword);
-
         switch (target) {
             case "1":
                 setPostData([...data].filter((post) => post.title.includes(keyword)));
@@ -55,7 +52,7 @@ function Search({ data, setPostData }) {
             default:
                 break;
         }
-    }, [target, keyword]);
+    }, [target, keyword, data]);
 
     const handleEnter = (event) => {
         if (event.key === "Enter") {

@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// 게시글 원본 데이터
-import data from "./blog_data/data.json";
-
 import ListTable from "./Table/ListTable";
 import SortSelecter from "./Filter/Sort";
 import CategorySelecter from "./Filter/Category";
@@ -14,21 +11,35 @@ import Pagenation from "./Pagenation/Pagenation";
 const tableHeader = ["#", "Title", "Category", "Date"];
 function Blog() {
     const navigate = useNavigate();
+
+    // 원본 데이터
+    const [data, setData] = useState([]);
+
     // Search가 수정
     const [postData, setPostData] = useState(data); // 게시글 데이터
     // Sort와 Category가 수정
     const [sortedData, setSortedData] = useState(data); // 정렬/필터링 된 게시글 데이터
     // Pagenation이 수정
     const [tablePostData, setTablePostData] = useState([]); // 리스트테이블에 표시될 현재 페이지의 게시글 데이터
-
+ 
     const handleWriteBtn = (event) => {
         navigate(`/blog/post/${data.length + 1}`, {
             state: {
                 index: data.length + 1,
-                currentData: data[data.length + 1],
+                currentData: data[data.length],
             },
         });
     };
+
+    useEffect(() => {
+        fetch("http://localhost:3001/data")
+        .then(res => {
+            return res.json();
+        })
+        .then(res => {
+            setData(res);
+        })
+    }, []);
 
     return (
         <div className="container">
