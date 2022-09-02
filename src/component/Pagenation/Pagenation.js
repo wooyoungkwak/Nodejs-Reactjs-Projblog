@@ -112,7 +112,7 @@ function Pagenation({ sortedData, setTablePostData }) {
 
     return (
         <>
-        <div className="col-1">
+            <div className="col-1">
                 <select ref={postNumSelecter} onChange={(e) => handlePostNumSelect(e)} className="form-select text-center">
                     <option value={10}>10</option>
                     <option value={25}>25</option>
@@ -139,7 +139,7 @@ function Pagenation({ sortedData, setTablePostData }) {
                 </ul>
             </div>
         </>
-            
+
     );
 }
 

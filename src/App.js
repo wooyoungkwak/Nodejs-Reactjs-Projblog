@@ -1,19 +1,19 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Nav from './component/Nav';
-import Header from './component/Header';
-import Footer from './component/Footer';
-import Home from './component/Home';
-import About from './page/About';
-import Contact from './component/Contact';
-import Blog from './component/Blog';
-import PostPage from './component/Postpage';
-
-import AddScript from './component/AddScript';
-
 import "./css/prog-blog-styles.css";
 import "./css/styles.css";
+
+import Home from    './page/Home';
+import About from   './page/About';
+import Contact from './page/Contact';
+import Blog from    './page/Blog';
+
+import Nav from       './layout/Nav';
+import Header from    './layout/Header';
+import Footer from    './layout/Footer';
+import PostPage from  './component/Postpage';
+import AddScript from './component/AddScript';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
