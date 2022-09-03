@@ -6,11 +6,7 @@ import Paging from "../component/Pagenation/Paging";
 import { TitleSelecter, DualTitleSelecter } from "../component/Selector/TitleSelector";
 import Selecter from "../component/Selector/Selector";
 import Button from "../component/Button/Button";
-
-import SortSelecter from "../component/Selector/Sort";
-import CategorySelecter from "../component/Selector/Category";
-import Search from "../component/Search/Search";
-import Pagenation from "../component/Pagenation/Pagenation";
+import TitleSelectorSearch from "../component/Search/TitleSelectorSearch";
 
 // import { Button } from "bootstrap";
 
@@ -51,6 +47,13 @@ function Blog() {
     //         })
     // }, []);
 
+    var searchOptions= [
+        "제목",
+        "내용",
+        "번호",
+        "제목+내용",
+    ]
+
     var sortOptions = [
         "번호", "제목", "날짜"
     ];
@@ -71,11 +74,16 @@ function Blog() {
         console.log(data);
     }
 
+    function sampleSearch(selectData, inputData) {
+        console.log("data = ", selectData, " :: ", inputData);
+    }
+
     return (
         <div className="container">
             <div className="row">
                 <DualTitleSelecter title={"정렬"} berforeId={"beforeSelector"} afterId={"afterSelector"} beforeOptions={sortOptions} afterOptions={orderOptions} beforeCallback={setSortedData} afterCallback={setSortedData} />
-                <TitleSelecter title={"카테고리"} id={"catergorySelector"} options={categoryOptions} callback={setSortedData} />
+                <TitleSelecter title={"카테고리"} id={"catergorySelector"} options={categoryOptions} callback={sampleSearch} />
+                <TitleSelectorSearch options={searchOptions} callback={sample}/>
             </div>
 
             <ListTable header={tableHeader} tablePostData={tablePostData} />

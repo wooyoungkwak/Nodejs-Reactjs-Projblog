@@ -1,5 +1,3 @@
-import Selecter from "./Selector";
-
 function TitleSelecter({ title, id, options, callback}) {
     return (
         <div className="col-2">
@@ -7,7 +5,7 @@ function TitleSelecter({ title, id, options, callback}) {
                 {title}
             </label>
             <div className="input-group row">
-                <Selecter title={title} id={id} options={options} callback={callback} className={"form-select text-center"}/>
+                {Selecter(id, options, callback, "form-select text-center")}
             </div>
         </div>
     );
@@ -20,10 +18,33 @@ function DualTitleSelecter({ title, berforeId, afterId, beforeOptions, afterOpti
                 {title}
             </label>
             <div className="input-group row">
-                <Selecter title={title} id={berforeId} options={beforeOptions} callback={beforeCallback} className={"form-select text-center"}/>
-                <Selecter title={title} id={afterId} options={afterOptions} callback={afterCallback} className={"form-select text-center"}/>
+                {Selecter(berforeId, beforeOptions, beforeCallback, "form-select text-center")}
+                {Selecter(afterId, afterOptions, beforeCallback, "form-select text-center")}
             </div>
         </div>
+    );
+}
+
+function Selecter(id, options, callback, className) {
+
+    const handleSelect = (event) => {
+        callback(event.target.value);
+    }
+
+    function optionList() {
+        let tags = [];
+
+        for (let i = 0; i < options.length; i++) {
+            tags.push(<option key={i} value={i+1}>{options[i]}</option>);
+        }
+
+        return tags;
+    }
+
+    return (
+        <select onChange={e => handleSelect(e)} className={className} id={id}>
+            {optionList()}
+        </select>
     );
 }
 
