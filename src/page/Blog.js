@@ -82,8 +82,8 @@ function Blog() {
         <div className="container">
             <div className="row">
                 <DualTitleSelecter title={"정렬"} berforeId={"beforeSelector"} afterId={"afterSelector"} beforeOptions={sortOptions} afterOptions={orderOptions} beforeCallback={setSortedData} afterCallback={setSortedData} />
-                <TitleSelecter title={"카테고리"} id={"catergorySelector"} options={categoryOptions} callback={sampleSearch} />
-                <TitleSelectorSearch options={searchOptions} callback={sample}/>
+                <TitleSelecter title={"카테고리"} id={"catergorySelector"} options={categoryOptions} callback={sample} />
+                <TitleSelectorSearch options={searchOptions} callback={sampleSearch}/>
             </div>
 
             <ListTable header={tableHeader} tablePostData={tablePostData} />

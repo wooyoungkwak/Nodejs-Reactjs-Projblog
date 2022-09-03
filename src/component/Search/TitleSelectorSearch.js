@@ -11,10 +11,6 @@ function TitleSelectorSearch({ options, callback}) {
         }
     };
 
-    const handleTargetSelect = (event) => {
-        setSelectData(event.target.value);
-    };
-
     const handleSearch = () => {
         callback(selectData, inputRef.current.value);
     };
@@ -48,7 +44,7 @@ function TitleSelectorSearch({ options, callback}) {
                 검색
             </label>
             <div className="input-group">
-                {Selecter("searchSelectLabel", options, handleTargetSelect, "form-select text-center")}
+                {Selecter("searchSelectLabel", options, setSelectData, "form-select text-center")}
                 <input ref={inputRef} onKeyDown={handleEnter} type="text" className="form-control" style={{ width: "65%" }} />
                 <button onClick={handleSearch} className="btn btn-outline-secondary" type="button" id="button-addon2">
                     Search
